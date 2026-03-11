@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PREMRAAJ | Elite Performance Centre</title>
+    <title>PREMRAAJ | Student. Designer. Brand Strategist.</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -44,7 +44,7 @@
 
         /* --- 导航栏 --- */
         nav {
-            height: 70px; /* 缩小高度 */
+            height: 70px;
             display: flex;
             align-items: center;
             position: fixed; width: 100%; top: 0; z-index: 1000;
@@ -53,7 +53,7 @@
             background: rgba(8, 8, 8, 0.85);
         }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { 
+        .logo-nav { 
             font-family: var(--font-heading); font-weight: 700; font-size: 1rem; 
             letter-spacing: 4px; color: var(--accent); text-decoration: none;
         }
@@ -65,13 +65,60 @@
         .nav-links a:hover { opacity: 1; color: var(--accent); }
 
         /* --- Hero --- */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; padding-top: 50px; }
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 120px; padding-bottom: 50px; }
+        
+        /* USER LOGO CONTAINER ( logo.jpeg ) */
+        .hero-logo-wrap {
+            width: clamp(140px, 20vw, 220px);
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .hero-logo-wrap:hover {
+            transform: scale(1.05) translateY(-5px);
+            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.7));
+        }
+        .hero-logo-wrap img { width: 100%; height: auto; display: block; object-fit: contain; }
+
         .hero-title {
             font-family: var(--font-heading); font-size: clamp(2.5rem, 8vw, 6.5rem);
             line-height: 0.9; text-transform: uppercase; font-weight: 700; margin-bottom: 30px;
+            letter-spacing: -2px;
         }
         .hero-title span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); transition: 0.6s ease; }
         .hero-title:hover span { color: var(--text-main); -webkit-text-stroke: 1px var(--accent); }
+
+        /* --- Personal Brand Manifesto WITH AVATAR --- */
+        .personal-about { margin-bottom: 120px; border-top: 1px solid var(--border); padding-top: 80px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 60px; align-items: flex-start; }
+        
+        /* AVATAR CONTAINER - EFFECTS REMOVED */
+        .avatar-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1; /* 保持正方形 */
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); /* 只保留基础缩放过渡 */
+        }
+        .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        
+        /* 只保留细微的缩放和边框高亮，作为悬停反馈，移除金色滤镜和金色方框 */
+        .avatar-wrap:hover {
+            transform: scale(1.03);
+            border-color: rgba(212, 175, 55, 0.5); /* 悬停时边框稍微亮一点 */
+        }
+
+        .manifesto-text { padding-left: 20px; border-left: 1px dashed rgba(212, 175, 55, 0.3); }
+        .manifesto-tag { color: var(--accent); letter-spacing: 3px; font-size: 0.65rem; text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 15px; display: block; }
+        .manifesto-text h2 { font-family: var(--font-heading); font-size: 1.4rem; color: var(--text-main); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        .manifesto-text p { font-size: 1rem; color: var(--text-mute); max-width: 600px; line-height: 1.8; margin-bottom: 20px; }
+        
+        .skill-list { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 30px; }
+        .skill-list h3 { font-family: var(--font-heading); font-size: 0.8rem; color: var(--accent); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 3px; }
+        .skill-item { font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 2px; line-height: 2; color: var(--text-mute); text-transform: uppercase; display: flex; align-items: center; }
+        .skill-item span { color: var(--accent); margin-right: 12px; font-weight: bold; }
 
         /* 紧凑区域标题 */
         .section-header { margin-bottom: 40px; border-left: 2px solid var(--accent); padding-left: 15px; }
@@ -80,7 +127,6 @@
 
         /* --- 通用卡片布局 --- */
         .grid-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-bottom: 80px; }
-        
         .card-box { background: var(--bg); position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .card-box::after {
             content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px;
@@ -88,161 +134,95 @@
         }
         .card-box:hover::after { animation: scan 2.5s linear infinite; opacity: 1; }
 
-        /* 图片设置 */
         .img-wrap { height: 320px; background-size: cover; background-position: center; filter: grayscale(1) brightness(0.6); transition: 0.8s ease; }
         .card-box:hover .img-wrap { filter: grayscale(0) brightness(1); transform: scale(1.05); }
 
         .content-wrap { padding: 30px; position: relative; z-index: 5; background: var(--bg); flex-grow: 1; }
-        .content-wrap h3, .content-wrap h4 { font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 12px; color: var(--accent); letter-spacing: 1px; }
+        .content-wrap h3, .content-wrap h4 { font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 12px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
         .content-wrap p { color: var(--text-mute); font-size: 0.85rem; line-height: 1.6; }
 
         .spec-meta { display: flex; justify-content: space-between; font-size: 9px; font-family: var(--font-heading); color: var(--accent); opacity: 0.6; border-top: 1px dashed var(--border); padding-top: 15px; margin-top: 15px; }
 
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* --- Metrics (紧凑版) --- */
-        .metrics { padding: 60px 0; display: flex; justify-content: space-between; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 80px; }
-        .metric-item { flex: 1; text-align: center; }
-        .metric-val { font-family: var(--font-heading); font-size: 2.5rem; display: block; color: var(--accent); }
-        .metric-label { font-size: 0.6rem; color: var(--text-main); letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; display: block; opacity: 0.7; }
+        /* --- Research Deployment --- */
+        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-bottom: 80px; }
+        .news-card { background: var(--bg); position: relative; overflow: hidden; display: flex; flex-direction: column; border: 1px solid transparent; transition: border-color 0.4s; }
+        .news-card:hover { border-color: rgba(212, 175, 55, 0.4); }
+        .news-img { height: 240px; background-size: cover; background-position: center; filter: grayscale(1) brightness(0.7); transition: 1s cubic-bezier(0.23, 1, 0.32, 1); border-bottom: 1px solid var(--border); }
+        .news-card:hover .news-img { filter: grayscale(0) brightness(1); transform: scale(1.05); }
+        .news-content { padding: 30px; position: relative; z-index: 5; background: var(--bg); flex-grow: 1; }
+        .news-date { font-size: 9px; color: var(--accent); font-family: var(--font-heading); margin-bottom: 12px; display: block; opacity: 0.7; letter-spacing: 1px; }
+        .news-card h4 { font-family: var(--font-heading); font-size: 0.9rem; margin-bottom: 15px; letter-spacing: 1px; color: var(--text-main); text-transform: uppercase; }
+        .news-card p { font-size: 0.8rem; color: var(--text-mute); line-height: 1.6; margin-bottom: 20px; }
+        .read-more { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); text-decoration: none; position: relative; transition: 0.3s; }
+        .read-more::after { content: " →"; position: absolute; right: -15px; opacity: 0; transition: 0.3s; }
+        .news-card:hover .read-more { letter-spacing: 3px; }
+        .news-card:hover .read-more::after { opacity: 1; right: -20px; }
 
         /* --- CTA --- */
         .cta-section { text-align: center; padding: 100px 0; }
-        .btn { display: inline-block; padding: 18px 45px; border: 1px solid var(--accent); color: var(--text-main); text-decoration: none; font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 3px; transition: 0.4s; }
+        .btn { display: inline-block; padding: 18px 45px; border: 1px solid var(--accent); color: var(--text-main); text-decoration: none; font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 3px; transition: 0.4s; text-transform: uppercase;}
         .btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
 
         footer { padding: 60px 0 30px; border-top: 1px solid var(--border); }
         .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .footer-brand h2 { font-family: var(--font-heading); font-size: 1.2rem; letter-spacing: 6px; color: var(--accent); }
+        .social-links { display: flex; gap: 40px; }
+        .social-links a { color: var(--text-main); font-size: 2.5rem; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); opacity: 0.4; position: relative; }
+        .social-links a:hover { opacity: 1; color: var(--accent); transform: translateY(-8px) scale(1.1); text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4); }
 
         @media (max-width: 960px) {
-            .grid-layout { grid-template-columns: 1fr; }
-            .metrics { flex-direction: column; gap: 40px; padding: 40px 0; }
+            .grid-layout, .news-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-        }
-        .social-links { 
-            display: flex; 
-            gap: 40px; /* 增加图标间距 */
-        }
-        .social-links a { 
-            color: var(--text-main); 
-            font-size: 2.5rem; /* 尺寸显著增大 */
-            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); 
-            opacity: 0.4; 
-            position: relative;
-        }
-        .social-links a:hover { 
-            opacity: 1; 
-            color: var(--accent); 
-            transform: translateY(-8px) scale(1.1); /* 悬停时向上漂移并放大 */
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 
-                         0 0 40px rgba(212, 175, 55, 0.4); /* 增加金色霓虹发光效果 */
+            .hero { align-items: center; text-align: center; padding-top: 100px; }
+            
+            /* 移动端头像布局优化 */
+            .about-grid { grid-template-columns: 1fr; gap: 40px; justify-items: center; text-align: center; }
+            .avatar-wrap { width: 180px; } /* 移动端头像保持正方形彩色显示 */
+            .manifesto-text { border-left: none; padding-left: 0; border-top: 1px dashed var(--accent); padding-top: 30px; }
+            .skill-list { width: 100%; max-width: 400px; }
         }
 
-        /* --- RESEARCH DEPLOYMENT (资讯卡片带图片版) --- */
-        .news-grid {
+        /* 器材展示板块专用 */
+        .equipment-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px; /* 统一样式，紧凑感 */
-            background: var(--border);
+            grid-template-columns: repeat(2, 1fr); /* 这里的2列布局会让照片更清晰 */
+            gap: 20px;
             margin-bottom: 80px;
         }
 
-        .news-card {
-            background: var(--bg);
-            position: relative;
-            overflow: hidden;
+        .spec-sheet {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            border: 1px solid transparent;
-            transition: border-color 0.4s;
+            gap: 15px;
         }
 
-        .news-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
+        .spec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 10px;
         }
 
-        /* 资讯图片设置 */
-        .news-img {
-            height: 240px; /* 资讯图片高度 */
-            background-size: cover;
-            background-position: center;
-            filter: grayscale(1) brightness(0.7) contrast(1.1); /* 强制黑白硬核感 */
-            transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
-            border-bottom: 1px solid var(--border);
+        .spec-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            filter: grayscale(0.8) contrast(1.2);
+            transition: 0.5s;
         }
 
-        .news-card:hover .news-img {
-            filter: grayscale(0) brightness(1) contrast(1); /* 悬停时转彩色 */
-            transform: scale(1.05);
-        }
-
-        /* 资讯文字区域 */
-        .news-content {
-            padding: 30px;
-            position: relative;
-            z-index: 5;
-            background: var(--bg);
-            flex-grow: 1;
-        }
-
-        .news-date {
-            font-size: 9px;
-            color: var(--accent);
-            font-family: var(--font-heading);
-            margin-bottom: 12px;
-            display: block;
-            opacity: 0.7;
-            letter-spacing: 1px;
-        }
-
-        .news-card h4 {
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        .news-card p {
-            font-size: 0.8rem;
-            color: var(--text-mute);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* 阅读更多链接 */
-        .read-more {
-            display: inline-block;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            text-decoration: none;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .read-more::after {
-            content: " →";
-            position: absolute;
-            right: -15px;
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .news-card:hover .read-more {
-            letter-spacing: 3px;
-        }
-
-        .news-card:hover .read-more::after {
-            opacity: 1;
-            right: -20px;
+        .spec-sheet:hover .spec-img {
+            filter: grayscale(0) contrast(1);
         }
 
         @media (max-width: 960px) {
-            .news-grid { grid-template-columns: 1fr; }
+            .equipment-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -250,10 +230,11 @@
 
     <nav>
         <div class="container nav-inner">
-            <a href="#" class="logo">PREMRAAJ</a>
+            <a href="#" class="logo-nav">PREMRAAJ</a>
             <div class="nav-links">
-                <a href="#programs">Programs</a>
-                <a href="#facility">Equipment</a>
+                <a href="#about">About</a>
+                <a href="#projects">Protocols</a>
+                <a href="#intel">Media Lit.</a>
                 <a href="https://www.instagram.com/premraaj_fitness_centre">Contact</a>
             </div>
         </div>
@@ -261,159 +242,189 @@
 
     <main class="container">
         <section class="hero">
-            <span style="color: var(--accent); letter-spacing: 5px; font-size: 0.6rem; margin-bottom: 15px;">[ STATUS: OPERATIONAL ]</span>
-            <h1 class="hero-title">PREMRAAJ<br>FITNESS<br>CENTRE</h1>
+            <div class="hero-logo-wrap">
+                <img src="logo.jpeg" alt="PREMRAAJ Personal Logo">
+            </div>
+            
+            <span style="color: var(--accent); letter-spacing: 5px; font-size: 0.6rem; margin-bottom: 15px; font-family: var(--font-heading);">[ STATUS: OPERATIONAL ]</span>
+            <h1 class="hero-title">PREMRAAJ<span>STUDENT. DESIGNER.</span>BRAND STRATEGIST.</h1>
             <div style="border-left: 2px solid var(--accent); padding-left: 20px;">
-                <p style="max-width: 450px; color: var(--text-mute); text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem;">
-                    Re-engineering the human machine. A data-driven sanctuary for elite performance.
+                <p style="max-width: 480px; color: var(--text-mute); text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; font-family: var(--font-main);">
+                    Bridging the gap between Business, Branding, and Digital Design. Re-engineering identities for the new media landscape.
                 </p>
             </div>
         </section>
 
-        <section id="programs">
+        <section id="about" class="personal-about">
+            <div class="about-grid">
+                <div class="avatar-wrap">
+                    <img src="avatar.jpeg" alt="Premraaj Profile Avatar">
+                </div>
+
+                <div class="manifesto-text">
+                    <span class="manifesto-tag">// FOUNDATIONAL_INTEL</span>
+                    <h2>BRAND ARCHITECT</h2>
+                    <p>I am Premraaj, a student at the intersection of Business, Branding, and Digital Design. This project is my foundational portfolio, showcasing the fusion of my passion for technical precision and physical discipline.</p>
+                    <p>I focus on building resilient digital identities, optimizing social media presence, and deploying creative marketing strategies. Welcome to the Elite Performance Centre for your brand.</p>
+                </div>
+
+                <div class="skill-list">
+                    <h3>[ CORE_SKILLS ]</h3>
+                    <div class="skill-item"><span>[01]</span> LOGO_DESIGN</div>
+                    <div class="skill-item"><span>[02]</span> SOCIAL_MEDIA_BRANDING</div>
+                    <div class="skill-item"><span>[03]</span> CREATIVE_MARKETING</div>
+                    <div class="skill-item"><span>[04]</span> GRAPHIC_DESIGN_BASIC</div>
+                    <div class="skill-item"><span>[05]</span> MEDIA_LITERACY</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
             <div class="section-header">
-                <span class="section-tag">// TRAINING PILLARS</span>
-                <h2 class="section-title">PROTOCOLS</h2>
+                <span class="section-tag">// BRANDING_PILLARS</span>
+                <h2 class="section-title">DEPLOYED_WORKS</h2>
             </div>
             <div class="grid-layout">
                 <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <div class="img-wrap" style="background-image: url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1000');"></div>
                     <div class="content-wrap">
-                        <h3>STRUCTURAL GROWTH</h3>
-                        <p>Mechanical tension engineering. We optimize hypertrophy through specific motor unit recruitment.</p>
+                        <h3>GYM_LOGO_SYSTEM</h3>
+                        <p>Modern branding concept for a fitness Instagram page. Focus on industrial strength and digital precision.</p>
                     </div>
                 </div>
                 <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('stretch-jpg.avif');"></div>
+                    <div class="img-wrap" style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=1000');"></div>
                     <div class="content-wrap">
-                        <h3>NEURAL DRIVE</h3>
-                        <p>CNS conditioning. Rewire your nervous system to handle extreme loads with precision.</p>
+                        <h3>SOCIAL_MEDIA_FEED</h3>
+                        <p>Optimizing engagement through consistent visual identity and data-driven content architecture.</p>
                     </div>
                 </div>
                 <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <div class="img-wrap" style="background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1000');"></div>
                     <div class="content-wrap">
-                        <h3>METABOLICS</h3>
-                        <p>Bio-energetic scaling. High-output conditioning to push VO2 limits and cellular recovery.</p>
+                        <h3>CREATIVE_MARKETING</h3>
+                        <p>Deployment strategy for a performance supplement brand, leveraging multi-channel storytelling.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="facility">
-            <div class="section-header">
-                <span class="section-tag">// PRECISION TOOLS</span>
-                <h2 class="section-title">EQUIPMENT</h2>
+        <section id="equipment">
+    <div class="section-header">
+        <span class="section-tag">// HARDWARE_ASSETS</span>
+        <h2 class="section-title">EQUIPMENT_MANIFEST</h2>
+    </div>
+
+    <div class="equipment-grid">
+        <div class="spec-sheet">
+            <div class="spec-header">
+                <span style="font-family: var(--font-heading); font-size: 0.7rem; color: var(--accent);">ASSET_01</span>
+                <span style="font-size: 0.6rem; opacity: 0.5;">FREE_WEIGHT_STATION</span>
             </div>
-            <div class="grid-layout">
-                <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('1.webp');"></div>
-                    <div class="content-wrap">
-                        <h4>COMPETITION RACK</h4>
-                        <p>11-gauge carbon steel structure. Integrated laser-cut numbering for safety positioning.</p>
-                        <div class="spec-meta"><span>MAX_LOAD: 500KG</span><span>TYPE: INDUSTRIAL</span></div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('2.webp');"></div>
-                    <div class="content-wrap">
-                        <h4>CALIBRATED PLATES</h4>
-                        <p>IPF standard tolerance. High-density chrome finishing for optimal grip friction.</p>
-                        <div class="spec-meta"><span>PRECISION: +/- 10G</span><span>SERIES: ELITE</span></div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <div class="img-wrap" style="background-image: url('3.jpg');"></div>
-                    <div class="content-wrap">
-                        <h4>ISO-LATERAL CABLES</h4>
-                        <p>Dual-axis movement mimicking bio-mechanics. Zero-friction pulley system for tension.</p>
-                        <div class="spec-meta"><span>SYSTEM: MAG-FLUID</span><span>AXIS: 360°</span></div>
-                    </div>
-                </div>
+            <img src="dumbellrack.jpeg" class="spec-img" alt="Dumbbell Rack">
+            <div class="content-wrap" style="padding: 10px 0;">
+                <h4>PRECISION_DUMBBELL_ARRAY</h4>
+                <p>Industrial-grade dumbbell matrix. Developing core stability and muscle balance through free weight training is the physical foundation for building brand resilience.</p>
             </div>
-        </section>
+        </div>
+
+        <div class="spec-sheet">
+            <div class="spec-header">
+                <span style="font-family: var(--font-heading); font-size: 0.7rem; color: var(--accent);">ASSET_02</span>
+                <span style="font-size: 0.6rem; opacity: 0.5;">COMPOUND_STATION</span>
+            </div>
+            <img src="smith.jpeg" class="spec-img" alt="Smith Machine">
+            <div class="content-wrap" style="padding: 10px 0;">
+                <h4>Smith Machines</h4>
+                <p>It provides a structured strength training core with a fixed trajectory, ensuring that every bit of load is precisely converted into muscle growth.</p>
+            </div>
+        </div>
+
+        <div class="spec-sheet">
+            <div class="spec-header">
+                <span style="font-family: var(--font-heading); font-size: 0.7rem; color: var(--accent);">ASSET_03</span>
+                <span style="font-size: 0.6rem; opacity: 0.5;">STRENGTH_ISOLATION</span>
+            </div>
+            <img src="select.jpeg" class="spec-img" alt="Strength Machines">
+            <div class="content-wrap" style="padding: 10px 0;">
+                <h4>Selectorized Machines</h4>
+                <p>Resistance Units: High-precision selectorized stations designed for biomechanical efficiency and targeted muscle isolation.</p>
+            </div>
+        </div>
+
+        <div class="spec-sheet">
+            <div class="spec-header">
+                <span style="font-family: var(--font-heading); font-size: 0.7rem; color: var(--accent);">ASSET_04</span>
+                <span style="font-size: 0.6rem; opacity: 0.5;">ENDURANCE_CORE</span>
+            </div>
+            <img src="plateload.jpeg" class="spec-img" alt="Cardio Zone">
+            <div class="content-wrap" style="padding: 10px 0;">
+                <h4>Plate-Loaded Machines</h4>
+                <p>High-output heavy artillery for maximum mechanical tension and raw strength development.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
         <section id="intel" style="margin-bottom: 100px;">
-            <div class="section-header">
-                <span class="section-tag">// INTEL_FEED</span>
-                <h2 class="section-title">RESEARCH DEPLOYMENT</h2>
-            </div>
+    <div class="section-header">
+        <span class="section-tag">// INTEL_DEPLOYMENT</span>
+        <h2 class="section-title">RESEARCH_DEPLOYMENT</h2>
+    </div>
 
-            <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1000&auto=format&fit=crop');"></div>
-                    <div class="news-content">
-                        <span class="news-date">LOG_2026.03.11</span>
-                        <h4>HYPERTROPHY RADIUS</h4>
-                        <p>New data suggests that varying joint angles during mechanical tension phases increases motor unit recruitment.</p>
-                        <a href="#" class="read-more">View_Analysis</a>
-                    </div>
-                </div>
+    <div class="news-grid">
+        <div class="news-card">
+            <div class="news-img" style="background-image: url('12.jpg');"></div>
+            <div class="news-content">
+                <span class="news-date">LOG_2026.03.11 // MECHANICAL_LOGIC</span>
+                <h4>LINEAR_STRUCTURAL_EFFICIENCY</h4>
+                <p>Decoding how fixed-track systems like the Smith Machine reduce stabilization overhead to maximize primary muscle fiber recruitment through linear force vectors.</p>
+                <a href="#" class="read-more">View_Analysis</a>
+            </div>
+        </div>
 
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('recovery.jpg');"></div>
-                    <div class="news-content">
-                        <span class="news-date">LOG_2026.03.05</span>
-                        <h4>RECOVERY PROTOCOL X-3</h4>
-                        <p>Implementing contrast therapy within 90 minutes of neural strain accelerates neural recovery.</p>
-                        <a href="#" class="read-more">View_Analysis</a>
-                    </div>
-                </div>
+        <div class="news-card">
+            <div class="news-img" style="background-image: url('34.png');"></div>
+            <div class="news-content">
+                <span class="news-date">LOG_2026.03.05 // BIOMECHANICS</span>
+                <h4>ISOLATION_VECTOR_PROTOCOL</h4>
+                <p>An analysis of selectorized resistance units and their role in maintaining constant tension through cam-driven mechanical advantages in isolated training.</p>
+                <a href="#" class="read-more">View_Analysis</a>
+            </div>
+        </div>
 
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop');"></div>
-                    <div class="news-content">
-                        <span class="news-date">LOG_2026.02.28</span>
-                        <h4>NUTRITION ARCHITECTURE</h4>
-                        <p>Optimizing leucine threshold timing to trigger protein synthesis effectively during post-activation.</p>
-                        <a href="#" class="read-more">View_Analysis</a>
-                    </div>
-                </div>
+        <div class="news-card">
+            <div class="news-img" style="background-image: url('56.png');"></div>
+            <div class="news-content">
+                <span class="news-date">LOG_2026.02.28 // RAW_FORCE</span>
+                <h4>KINETIC_CHAIN_INTEGRATION</h4>
+                <p>Research on the psychological and physiological impact of plate-loaded systems in bridging the gap between guided motion and raw, free-weight resistance.</p>
+                <a href="#" class="read-more">View_Analysis</a>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section class="metrics">
-            <div class="metric-item">
-                <span class="metric-val">100%</span>
-                <span class="metric-label">Precision</span>
-            </div>
-            <div class="metric-item">
-                <span class="metric-val">X-05</span>
-                <span class="metric-label">Protocols</span>
-            </div>
-            <div class="metric-item">
-                <span class="metric-val">48H</span>
-                <span class="metric-label">Recovery</span>
-            </div>
-            <div class="metric-item">
-                <span class="metric-val">RAW</span>
-                <span class="metric-label">Force</span>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <h2 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 40px; letter-spacing: 12px;">READY TO <span style="color: var(--accent);">UPGRADE</span>?</h2>
-            <a href="https://www.instagram.com/premraaj_fitness_centre" class="btn">DEPLOY_PROTOCOL</a>
-        </section>
+        
 
         <footer>
-            <div class="footer-top" style="align-items: center; margin-bottom: 50px;">
+            <div class="footer-top">
                 <div class="footer-brand">
                     <h2 style="letter-spacing: 8px;">PREMRAAJ</h2>
-                    <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;">Performance Unit</span>
+                    <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; font-family: var(--font-heading);">Brand Strategist. Designer.</span>
                 </div>
                 <div class="social-links">
                     <a href="https://www.instagram.com/premraaj_fitness_centre" target="_blank" title="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@premraajfitness?_r=1&_t=ZS-94ZlIA3diq8" target="_blank" title="TikTok">
+                    <a href="https://www.tiktok.com/@premraajfitness" target="_blank" title="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.55rem; letter-spacing: 2px; color: var(--text-mute); padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
-                <div>© 2026 // PREMRAAJ PERFORMANCE UNIT</div>
-                <div>ESTABLISHED FOR EXCELLENCE</div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.55rem; letter-spacing: 2px; color: var(--text-mute); padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-heading);">
+                <div>© 2026 // PREMRAAJ BRAND UNIT</div>
+                <div>SUBMITTED FOR EXCELLENCE // 2026.03.11</div>
             </div>
         </footer>
     </main>
